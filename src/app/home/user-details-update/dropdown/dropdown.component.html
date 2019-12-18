@@ -1,0 +1,10 @@
+<select *ngIf="params.value==null; else show" [(ngModel)]="selectedManager" (change)="updateManager()">
+    <option value=''>--Select--</option>
+    <option [value]="i.usrId" *ngFor=" let i of managers">
+{{i.usrName}}
+    </option>
+</select>
+<ng-template #show>
+    {{managers[params.rowIndex].usrName}}
+</ng-template>
+      

@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'ag-grid-community/dist/styles/ag-grid.css';
+@import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+html {
+    height: 100%;
+    
+}
+body {
+    
+    background: linear-gradient(180deg, #17a2bb 50%, #efefef 50%) no-repeat;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.ag-cell { 
+    overflow:visible; 
+  }
+  
+  .ag-row {
+      z-index: 0;
+  }
+  
+  .ag-row.ag-row-focus {
+      z-index: 1;
+  }

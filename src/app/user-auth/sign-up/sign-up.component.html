@@ -1,0 +1,167 @@
+<div style="margin-top: 3%;">
+
+    <div *ngIf="isSubmit==false">
+  <div class="container col-lg-4 col-lg-offset-4">
+    <div class="card card-primary shadow-lg  mb-5 bg-white rounded">
+      <div class="card-header font-weight-bold text-center"> <h3>Sign Up</h3></div>
+      <div class="card-body"> 
+          <form class="form" [formGroup]="registerForm"  (ngSubmit)="register()" >
+            
+            
+            <div class="form-group row">
+              
+              <label for="usrName" class="col-sm-3 col-form-label font-weight-bold ">Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="usrName"  formControlName="usrName">                  
+                <p *ngIf="!registerForm.controls.usrName.valid && registerForm.controls.usrName.dirty" class="alert alert-danger">This field is required!</p>
+              </div> 
+            </div>                              
+            <div class="form-group row">
+              
+              <label for="password" class="col-sm-3 col-form-label font-weight-bold ">Password</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" name="password"  formControlName="password">
+                <p *ngIf="!registerForm.controls.password.valid && registerForm.controls.password.dirty" class="alert alert-danger">Password should contain atleast 8 characters!</p>        
+              </div> 
+            </div>                              
+     
+            
+            
+            
+            <div class="form-group row">
+              <label for="usrEmail" class="col-sm-3 col-form-label font-weight-bold">Email</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" name="usrEmail" formControlName="usrEmail">                  
+                <p *ngIf="!registerForm.controls.usrEmail.valid && registerForm.controls.usrEmail.dirty" class="alert alert-danger">Enter value is not in email format!</p>
+              </div>
+            </div>            
+            
+            <div class="form-group row">
+              <label for="role" class="col-sm-3 col-form-label font-weight-bold">Role</label>
+              <div class="col-sm-9">                        
+                <fieldset formGroupName="role" >
+                  <select class="form-control" formControlName="rId">
+                    <option value=""selected disabled hidden>Choose here</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Manager</option>
+                    <option value="3">Employee</option>                        
+                  </select>
+                </fieldset>
+                <p *ngIf="!registerForm.controls.role.valid && registerForm.controls.role.dirty" class="alert alert-danger">This field is required!</p>                      
+                
+              </div>
+              
+            </div>   
+            
+            <div class="form-group row">
+              <label for="usrPhno" class="col-sm-3 col-form-label font-weight-bold">Phone No</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="usrPhno" formControlName="usrPhno">                  
+                <p *ngIf="!registerForm.controls.usrPhno.valid && registerForm.controls.usrPhno.dirty" class="alert alert-danger">It should be 10 digit number</p>
+              </div>
+            </div>            
+            
+            <div class="form-group row">
+              <label for="usrCurrentAdd" class="col-sm-3 col-form-label font-weight-bold">Current Address</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="usrCurrentAdd"  formControlName="usrCurrentAdd">           
+                <p *ngIf="!registerForm.controls.usrCurrentAdd.valid && registerForm.controls.usrCurrentAdd.dirty" class="alert alert-danger">This field is required!</p>
+                
+              </div>
+            </div>            
+            
+            <div class="form-group row">
+              <label for="usrPermanentAdd" class="col-sm-3 col-form-label font-weight-bold">Permanent Address</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="usrPermanentAdd"  formControlName="usrPermanentAdd">   
+                <p *ngIf="!registerForm.controls.usrPermanentAdd.valid && registerForm.controls.usrPermanentAdd.dirty" class="alert alert-danger">This field is required!</p>               
+              </div>
+            </div>            
+            
+            <!-- <div class="form-group row justify-content-center">   
+                    <label for="usrProfileImage" class="col-sm-3 col-form-label font-weight-bold">Profile</label> 
+                    <div class="col-sm-9">                        
+                        <input type="file" class="dropify" formControlName="usrProfileImage" #AccUserImg>
+                    </div>
+                   -->
+
+                <!-- <app-file-upload formControlName="image" [progress]="progress"></app-file-upload> -->
+
+              <!--             
+              <div class="col-sm-3">
+                <label class="image-upload-container btn btn-bwm"></label>
+                    <div class="col-sm-9">
+                    </div>
+                        <input #imageInput
+                        type="file"
+                        accept="image/*"
+                        (change)="processFile(imageInput)">
+                      </div>             -->
+                    <!-- </div> -->
+
+            
+            <div class="form-group row justify-content-center">
+              
+              <div class="col-sm-3">
+                <button  class="btn btn-outline-primary" [disabled]="!registerForm.valid " >SignUp <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+              </div>
+              <div class="col-sm-3">
+                <a class="btn btn-outline-secondary"  (click)="cancel()">Cancel</a>
+              </div>
+            </div>
+          </form> 
+        </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+
+        <div *ngIf="successMessage!=null">
+          <div class="container col-lg-5 col-lg-offset-2">
+          <br>
+          <br>
+          <div class="alert alert-success alert-dismissible fade show ">
+            <h6 class="text-center">
+                  <strong>Success!</strong> {{successMessage}} 
+                  <br> with employee Id <strong>{{successId}} </strong>
+                  <br>
+                  For login <a [routerLink]="['/login']"> click </a> here
+                  
+                </h6>
+              </div>
+            </div>
+            <br>
+<br>
+        </div>
+
+        <div *ngIf="errorMessage!=null">
+
+          <br>
+          <div class="container col-lg-8 col-lg-offset-2 shadow-lg  mb-5 bg-white rounded">
+            <br>
+           
+            <div  class="alert alert-light alert-dismissible fade show text-center">         
+              <h1>{{errorMessage.status}}</h1>
+              <h1> OOPS!</h1>
+                    <strong>Error!</strong> {{errorMessage.message}} 
+                    
+                    <br>
+                    For sign up <a href=""> click </a> here
+                  
+                    <br>
+    
+                </div>
+                <br>
+                <br>
+              </div>
+              <br>
+    <br>
+
+    </div>
+
+
+  </div>
+  

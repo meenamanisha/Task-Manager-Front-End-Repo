@@ -1,0 +1,57 @@
+<br> 
+<div class="container-lg">
+  <div *ngIf="listOfupdatedUsers==null &&rowData!=null;">
+
+
+    <ag-grid-angular #myGrid [enableSorting]="true" [pagination]="true" [enableFilter]="true" paginationPageSize=10
+      rowSelection='multiple' [rowMultiSelectWithClick]="true" style="height: 390px;" class="ag-theme-balham"
+      [rowData]="rowData" [suppressCellSelection]="true" [columnDefs]="columnDefs">
+    </ag-grid-angular>
+
+    <button class="btn btn-success" (click)="onSubmit()">Submit</button>
+
+  </div>
+  <div *ngIf="listOfupdatedUsers!=null && error==null">
+    <div class="container col-lg-7 col-lg-offset-2 text-center">
+      <br>
+      <br>
+      <div class="alert alert-success alert-dismissible fade show ">
+        Following employee's managers has been updated
+        <h6 class="text-center">
+          <div *ngFor="let item of listOfupdatedUsers">
+
+            <strong>{{item}}</strong>
+          </div>
+
+        </h6>
+      </div>
+    </div>
+
+    <br>
+  </div>
+
+
+  <div *ngIf="error!=null">
+    <div class="container col-lg-8 col-lg-offset-2 shadow-lg  mb-5 bg-white rounded">
+      <br>
+
+      <div class="alert alert-light alert-dismissible fade show text-center">
+        <h1>{{error.status}}</h1>
+        <h1> OOPS!</h1>
+        <strong>Error!</strong> {{error.message}}
+
+        <br>
+        <a href=""> click </a> here
+
+        <br>
+
+      </div>
+      <br>
+      <br>
+    </div>
+    <br>
+    <br>
+  </div>
+
+
+</div>

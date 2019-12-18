@@ -1,0 +1,31 @@
+
+<div> 
+<div *ngIf="check()">
+
+
+        <nav class="navbar navbar-expand-sm navbar-light">    
+            <h1 >Task Manager</h1>
+              
+            <button #navbarToggler class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" (click)="isShown = !isShown" [attr.aria-expanded]="isShown"  aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="navbar-collapse collapse justify-content-between" [ngClass]="{ 'show': isShown }" id="navbarSupportedContent" >
+              <ul class="navbar-nav ml-auto">        
+                <li class="nav-item">          
+                  <a class="nav-link"  [routerLink]='["/login"]' (click)="isShown = false" routerLinkActive="active"><h5 >Login</h5></a>
+                </li>
+                <li class="nav-item">
+                    <a  class="nav-link" [routerLink]='["/signup"]'   (click)="isShown = false" routerLinkActive="active"><h5 >Sign Up</h5></a>          
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+          <router-outlet ></router-outlet>          
+         
+          
+          
+          
+          </div>
+         

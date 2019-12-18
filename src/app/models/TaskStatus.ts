@@ -1,0 +1,4 @@
+export enum taskStatus
+{
+    COMPLETED,ON_HOLD,IN_PROCESS,CANCELLED,NEW
+}

@@ -10,25 +10,25 @@ import { user } from '../models/User';
 })
 export class HomeComponent implements OnInit {
 
- 
+
   private userRole: string;
-  constructor(private router: Router, private serv:UserServService) { }
-  private us:user;
-  ngOnInit() {    
+  constructor(private router: Router, private serv: UserServService) { }
+  private us: user;
+  ngOnInit() {
     this.isShow = false;
-    
+
     this.serv.currentUser = JSON.parse(localStorage.getItem('user'));
     this.us = this.serv.currentUser;
     this.userRole = this.us.role.rName.toString();
   }
   isShow = false;
-  change(s: string) {    
-    
+  change(s: string) {
+
     if (s == "home")
       this.serv.isShow = false;
     else
-      this.serv.isShow = true;      
-      
+      this.serv.isShow = true;
+
   }
   logOut() {
     localStorage.removeItem("user")
@@ -36,5 +36,4 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login'])
 
   }
-
 }

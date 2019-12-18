@@ -66,8 +66,8 @@
         <br>
         <br>
         <div class="row">
-          <span class="col-md-2"></span>
-          <div class="col-md-2 ">
+          <span class="col-md-2 col-sm-2"></span>
+          <div class="col-md-2 col-sm-3 col-4">
             <div class="panel ">
               <div class="panel-body"><img src="assets/task.png" class="img-responsive" style="width: 100%;"
                   alt="Image"></div>
@@ -77,7 +77,7 @@
                   [routerLink]="['createTask']">Create Task</a></div>
             </div>
           </div>
-          <div class="col-md-2 ">
+          <div class="col-md-2 col-sm-3 col-4">
 
             <div class="panel ">
               <div class="panel-body"><img src="assets/TaskAssign.png" class="img-responsive " style="width: 100%;"
@@ -85,11 +85,11 @@
               <br>
 
               <div class="panel-footer"><a class="btn btn-success btn-block " (click)="change('userDetails')"
-                  [routerLink]="['userUpdate']">Assign Task</a></div>
+                  [routerLink]="['assignTask']">Assign Task</a></div>
             </div>
           </div>
 
-          <div class="col-md-2 ">
+          <div class="col-md-2 col-sm-3 col-4">
 
             <div class="panel ">
               <div class="panel-body"><img src="assets/UserTask.png" class="img-responsive " style="width: 100%;"
@@ -97,7 +97,7 @@
               <br>
 
               <div class="panel-footer"><a class="btn btn-success btn-block " (click)="change('userDetails')"
-                  [routerLink]="['userUpdate']">Assign Task</a></div>
+                  [routerLink]="['userUpdate']">Verify Task</a></div>
             </div>
           </div>
 
@@ -113,3 +113,4 @@
   <div *ngIf="serv.isShow==true">
     <router-outlet></router-outlet>
   </div>
+</div>

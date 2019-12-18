@@ -10,7 +10,6 @@ import { AuthenticationService } from 'src/app/ServicesForAll/authentication.ser
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
   isSubmit = false;
   registerForm: FormGroup
   constructor(private formBuilder: FormBuilder, private router: Router, private serv: AuthenticationService) { }
@@ -42,7 +41,7 @@ export class SignUpComponent implements OnInit {
 
     this.serv.registration(this.registerForm.value).subscribe(
       t => {
-      this.successId = t.usrId, this.successMessage = t.message
+        this.successId = t.usrId, this.successMessage = t.message
       },
       err => {
 

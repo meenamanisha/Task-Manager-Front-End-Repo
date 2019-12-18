@@ -1,103 +1,115 @@
 <div style="margin-top: 3%;">
 
-    <div *ngIf="isSubmit==false">
-  <div class="container col-lg-5 col-lg-offset-4">
-    <div class="card card-primary shadow-lg  mb-5 bg-white rounded">
-      <div class="card-header font-weight-bold text-center"> <h3>Create Task</h3></div>
-      <div class="card-body"> 
-          <form class="form" [formGroup]="taskForm"  (ngSubmit)="submit()" >
-            
-            
+  <div *ngIf="isSubmit==false">
+    <div class="container col-lg-6 col-lg-offset-3 col-md-7 col-md-2 col-xl-5 col-cl-4 col-sm-10 col-sm-offset-1">
+      <div class="card card-primary shadow-lg  mb-5 bg-white rounded">
+        <div class="card-header font-weight-bold text-center">
+          <h3>Create Task</h3>
+        </div>
+        <div class="card-body">
+          <form class="form" [formGroup]="taskForm" (ngSubmit)="submit()">
+
+
             <div class="form-group row">
-              
+
               <label for="tName" class="col-sm-3 col-form-label font-weight-bold ">Task Name</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="tName"  formControlName="tName">                  
-                <p *ngIf="!taskForm.controls.tName.valid && taskForm.controls.tName.dirty" class="alert alert-danger">This field is required!</p>
-              </div> 
-            </div>                              
-                                       
-             
-            
+                <input type="text" class="form-control" name="tName" formControlName="tName">
+                <p *ngIf="!taskForm.controls.tName.valid && taskForm.controls.tName.dirty" class="alert alert-danger">
+                  This field is required!</p>
+              </div>
+            </div>
+
+
+
             <div class="form-group row">
               <label for="tExpEff" class="col-sm-3 col-form-label font-weight-bold">Expected efforts</label>
               <div class="col-sm-9">
-                <input type="number" class="form-control" name="tExpEff"  formControlName="tExpEff">           
-                <p *ngIf="!taskForm.controls.tExpEff.valid && taskForm.controls.tExpEff.dirty" class="alert alert-danger">This field is required!</p>
-                
-              </div>
-            </div>            
-            
-            <div class="form-group row">
-              <label for="tOwner" class="col-sm-3 col-form-label font-weight-bold">Task Owner</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" name="tOwner"  formControlName="tOwner">   
-                <p *ngIf="!taskForm.controls.tOwner.valid && taskForm.controls.tOwner.dirty" class="alert alert-danger">This field is required!</p>               
-              </div>
-            </div>            
-                        
-            <div class="form-group row justify-content-center">
-              
-              <div class="col-sm-3">
-                <button  type="submit" class="btn btn-outline-primary" [disabled]="!taskForm.valid " >Create</button>
-              </div>
-              <div class="col-sm-3">
-                <a class="btn btn-outline-secondary"   (click)="cancel()">Cancel</a>
+                <input type="number" class="form-control" name="tExpEff" formControlName="tExpEff">
+                <p *ngIf="!taskForm.controls.tExpEff.valid && taskForm.controls.tExpEff.dirty"
+                  class="alert alert-danger">Please provide a valid number and it can't be 0 or negative!</p>
+
               </div>
             </div>
-          </form> 
+
+
+            <div class="form-group row">
+              <label for="tDesc" class="col-sm-3 col-form-label font-weight-bold">Description</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="tDesc" formControlName="tDesc">
+                <p *ngIf="!taskForm.controls.tDesc.valid && taskForm.controls.tDesc.dirty" class="alert alert-danger">
+                  Please provide a description for task!</p>
+
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="Owner" class="col-sm-3 col-form-label font-weight-bold">Task Owner</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="Owner" readonly value={{currentUser.usrName}}>
+              </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+
+              <div class="col-sm-3">
+                <button type="submit" class="btn btn-outline-primary" [disabled]="!taskForm.valid ">Create</button>
+              </div>
+              <div class="col-sm-3">
+                <a class="btn btn-outline-secondary" (click)="cancel()">Cancel</a>
+              </div>
+            </div>
+          </form>
         </div>
 
 
-
-        </div>
 
       </div>
+
     </div>
+  </div>
 
-        <div *ngIf="successMessage!=null">
-          <div class="container col-lg-5 col-lg-offset-2">
+  <div *ngIf="successMessage!=null">
+    <div class="container col-lg-7 col-lg-offset-2 col-md-8 col-md-2 col-xl-6 col-cl-3 ">
+      <br>
+      <br>
+      <div class="alert alert-success alert-dismissible fade show ">
+        <h6 class="text-center">
+          <strong>Success!</strong> {{successMessage}}
           <br>
-          <br>
-          <div class="alert alert-success alert-dismissible fade show ">
-            <h6 class="text-center">
-                  <strong>Success!</strong> {{successMessage}} 
-                  <br> with employee Id <strong>{{successId}} </strong>
-                  <br>
-                  For login <a [routerLink]="['/login']"> click </a> here
-                  
-                </h6>
-              </div>
-            </div>
-            <br>
-<br>
-        </div>
+          <a [routerLink]="['/home']" (click)="service.isShow=false"> click </a> here
 
-        <div *ngIf="errorMessage!=null">
+        </h6>
+      </div>
+    </div>
+    <br>
+    <br>
+  </div>
 
-          <br>
-          <div class="container col-lg-8 col-lg-offset-2 shadow-lg  mb-5 bg-white rounded">
-            <br>
-           
-            <div  class="alert alert-light alert-dismissible fade show text-center">         
-              <h1>{{errorMessage.status}}</h1>
-              <h1> OOPS!</h1>
-                    <strong>Error!</strong> {{errorMessage.message}} 
-                    
-                    <br>
-                    For sign up <a href=""> click </a> here
-                  
-                    <br>
-    
-                </div>
-                <br>
-                <br>
-              </div>
-              <br>
+  <div *ngIf="errorMessage!=null">
+
+    <br>
+    <div class="container col-lg-8 col-lg-offset-2 shadow-lg  mb-5 bg-white rounded">
+      <br>
+
+      <div class="alert alert-light alert-dismissible fade show text-center">
+        <h1>{{errorMessage.status}}</h1>
+        <h1> OOPS!</h1>
+        <strong>Error!</strong> {{errorMessage.message}}
+
+        <br>
+        <a href=""> click </a> here
+
+        <br>
+
+      </div>
+      <br>
+      <br>
+    </div>
+    <br>
     <br>
 
-    </div>
-
-
   </div>
-  
+
+
+</div>

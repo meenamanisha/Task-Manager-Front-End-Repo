@@ -1,0 +1,38 @@
+<div class="container-lg">
+  <br>
+  <div *ngIf="rowData!=null">
+
+    <ag-grid-angular #myGrid [enableSorting]="true" [pagination]="true" [enableFilter]="true" paginationPageSize=10
+      rowSelection='multiple' [rowMultiSelectWithClick]="true" style="height: 390px; width: 100%;"
+      class="ag-theme-balham" [defaultColDef]="defaultColDef" [rowData]="rowData" [suppressCellSelection]="true"
+      [columnDefs]="columnDefs">
+    </ag-grid-angular>
+  </div>
+
+
+  <div *ngIf="errorMessage!=null">
+
+    <br>
+    <div class="container col-lg-8 col-lg-offset-2 shadow-lg  mb-5 bg-white rounded">
+      <br>
+
+      <div class="alert alert-light alert-dismissible fade show text-center">
+        <h1>{{errorMessage.status}}</h1>
+        <h1> OOPS!</h1>
+        <strong>Error!</strong> {{errorMessage.message}}
+
+        <br>
+        For sign up <a href=""> click </a> here
+
+        <br>
+
+      </div>
+      <br>
+      <br>
+    </div>
+    <br>
+    <br>
+
+  </div>
+
+</div>

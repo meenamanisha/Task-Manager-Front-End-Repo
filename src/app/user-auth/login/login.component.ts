@@ -12,7 +12,7 @@ import { TitleCasePipe } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private serv: AuthenticationService,private titlecase:TitleCasePipe) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private serv: AuthenticationService, private titlecase: TitleCasePipe) { }
 
   isSubmit: boolean = false;
   loginForm: FormGroup
@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
 
     this.serv.login(this.loginForm.value).subscribe(
       t => {
-      this.usr = t,
-      this.usr.usrName = this.titlecase.transform(this.usr.usrName);      
+        this.usr = t,
+          this.usr.usrName = this.titlecase.transform(this.usr.usrName);
         localStorage.setItem('user', JSON.stringify(this.usr));
         this.router.navigate(['/home']);
       },
@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
     );
 
   }
+
 
 
 }

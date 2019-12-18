@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class UserDetailsUpdateComponent implements OnInit {
 
 
-  constructor(private service: UserServService, private titlePipe: TitleCasePipe, private router: Router,private elRef: ElementRef) { }
+  constructor(private service: UserServService, private titlePipe: TitleCasePipe, private router: Router, private elRef: ElementRef) { }
   rowData: user[];
   columnDefs = [
     { headerName: 'Id', field: 'usrId', width: 110 },
@@ -30,11 +30,8 @@ export class UserDetailsUpdateComponent implements OnInit {
 
   error;
 
-  currentUser:user;
-  ngOnInit() {       
-    console.log(this.elRef.nativeElement.parentElement.component);
-    
-
+  currentUser: user;
+  ngOnInit() {
     this.service.updateManager.subscribe(data => this.updateManagers(data))
     this.service.getManager().subscribe(
       t => this.service.managers = t,
@@ -78,6 +75,7 @@ export class UserDetailsUpdateComponent implements OnInit {
 
 
   }
+
 
 
 }

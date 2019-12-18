@@ -17,6 +17,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { DropdownComponent } from './home/user-details-update/dropdown/dropdown.component';
 import { TitleCasePipe } from '@angular/common';
 import { TasksComponent } from './home/tasks/tasks.component';
+import { AssignTaskComponent } from './home/assign-task/assign-task.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { TasksComponent } from './home/tasks/tasks.component';
     ProfileComponent,
     UserDetailsUpdateComponent,
     DropdownComponent,
-    TasksComponent
+    TasksComponent,
+    AssignTaskComponent
   ],
   imports: [
     BrowserModule,

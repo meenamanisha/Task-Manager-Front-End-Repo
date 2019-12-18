@@ -10,12 +10,13 @@ import { UserServService } from '../HomeServices/user-serv.service';
 })
 export class ProfileComponent implements OnInit {
 
-  userRole:String;
-  constructor(private serv:UserServService) { }
-  private usr:user;
+  userRole: String;
+  constructor(private serv: UserServService) { }
+  private usr: user;
   ngOnInit() {
-    this.usr= this.serv.currentUser;
-    
+    this.usr = this.serv.currentUser;
+
   }
+
 
 }

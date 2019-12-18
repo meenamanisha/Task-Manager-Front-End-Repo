@@ -1,4 +1,8 @@
-export enum taskStatus
-{
-    COMPLETED,ON_HOLD,IN_PROCESS,CANCELLED,NEW
+export enum taskStatus {
+    COMPLETED = "COMPLETED",
+    ON_HOLD = "ON_HOLD",
+    IN_PROCESS = "IN_PROCESS",
+    CANCELLED = "CANCELLED",
+    NEW = "NEW",
+    PENDING_TO_VERFIFY = "PENDING_TO_VERFIFY"
 }

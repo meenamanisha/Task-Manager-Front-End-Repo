@@ -8,6 +8,7 @@ import { ProfileComponent } from './home/profile/profile.component';
 import { UserDetailsUpdateComponent } from './home/user-details-update/user-details-update.component';
 import { RouteGaurdService } from './home/HomeServices/route-gaurd.service';
 import { TasksComponent } from './home/tasks/tasks.component';
+import { AssignTaskComponent } from './home/assign-task/assign-task.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   [
     {path:'profile',component:ProfileComponent},
     {path:'userUpdate',component:UserDetailsUpdateComponent,canActivate:[RouteGaurdService]},
-    {path:'createTask',component:TasksComponent}
+    {path:'createTask',component:TasksComponent,canActivate:[RouteGaurdService]},
+    {path:'assignTask',component:AssignTaskComponent,canActivate:[RouteGaurdService]}
   ]},
   
   {path:'login',component:LoginComponent,runGuardsAndResolvers: 'always'},   

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-user-auth',
@@ -6,17 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-auth.component.css']
 })
 export class UserAuthComponent implements OnInit {
-  
-  isAuthShow=false;
+
+  isAuthShow = false;
   constructor() { }
-  check()
-  {
-    if(localStorage.getItem("user")!=null)
-        return false;
+  check() {
+    if (localStorage.getItem("user") != null)
+      return false;
     else
       return true;
   }
   ngOnInit() {
   }
+
 
 }

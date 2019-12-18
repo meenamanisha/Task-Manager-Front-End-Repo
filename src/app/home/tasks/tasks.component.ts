@@ -14,26 +14,30 @@ import { taskStatus } from 'src/app/models/TaskStatus';
 export class TasksComponent implements OnInit {
 
 
+
   isSubmit = false;
   taskForm: FormGroup
-  currentUser:user;
+  currentUser: user;
   errorMessage: String;
   successMessage: String;
-  successId: number;
-  CurrentUserName;
-  constructor(private formBuilder: FormBuilder, private router: Router, private service: UserServService,private titlePipe: TitleCasePipe) { 
 
-      this.currentUser = this.service.currentUser;
+  constructor(private formBuilder: FormBuilder, private router: Router, private service: UserServService, private titlePipe: TitleCasePipe) {
+
+    this.currentUser = this.service.currentUser;
   }
 
-  ngOnInit() {   
+
+  ngOnInit() {
 
     this.taskForm = this.formBuilder.group({
       tName: ['', [Validators.required, Validators.minLength(3)]],
-      tExpEff: ['', Validators.required],
-      tOwner: [{ value:this.currentUser.usrName, disabled: true }, Validators.required],
-      tStatus:[taskStatus.NEW]
+      tExpEff: ['', [Validators.required, Validators.min(1)]],
+      tOwner: [this.currentUser.usrId, Validators.required],
+      tDesc: ['', Validators.required],
+
+      tStatus: [taskStatus.NEW]
     });
+
   }
 
   submit() {
@@ -41,24 +45,15 @@ export class TasksComponent implements OnInit {
 
     this.isSubmit = true;
 
-    console.log(this.taskForm.value);
-    console.log(taskStatus.CANCELLED);
-    
-    
-    // this.service.registration(this.taskForm.value).subscribe(
-    //   t => {
-    //     this.successId = t.usrId, this.successMessage = t.message
-    //   },
-    //   err => {
-
-    //     this.errorMessage = err
-    //   },
-    // )
+    this.service.createTask(this.taskForm.value).subscribe(
+      t => this.successMessage = t.message,
+      err => this.errorMessage = err
+    );
 
   }
 
   cancel() {
 
-    this.taskForm.reset({tOwner:this.currentUser.usrName });
+    this.taskForm.reset({ tOwner: this.currentUser.usrId });
   }
 }

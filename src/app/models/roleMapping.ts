@@ -1,4 +1,3 @@
-export enum map
-{
-    ADMIN,EMPLOYEE,MANAGER
+export enum map {
+    ADMIN, EMPLOYEE, MANAGER
 }

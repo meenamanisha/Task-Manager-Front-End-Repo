@@ -15,9 +15,12 @@ import { ProfileComponent } from './home/profile/profile.component';
 import { UserDetailsUpdateComponent } from './home/user-details-update/user-details-update.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { DropdownComponent } from './home/user-details-update/dropdown/dropdown.component';
-import { TitleCasePipe } from '@angular/common';
+import { TitleCasePipe, DatePipe } from '@angular/common';
+
 import { TasksComponent } from './home/tasks/tasks.component';
 import { AssignTaskComponent } from './home/assign-task/assign-task.component';
+import { DropDownFortaskComponent } from './home/assign-task/drop-down-fortask/drop-down-fortask.component';
+import { VerfifyTaskComponent } from './home/verfify-task/verfify-task.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +32,9 @@ import { AssignTaskComponent } from './home/assign-task/assign-task.component';
     UserDetailsUpdateComponent,
     DropdownComponent,
     TasksComponent,
-    AssignTaskComponent
+    AssignTaskComponent,
+    DropDownFortaskComponent,
+    VerfifyTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -38,11 +43,11 @@ import { AssignTaskComponent } from './home/assign-task/assign-task.component';
     HttpClientModule,
     AngularFontAwesomeModule,
     FormsModule,
-    AgGridModule.withComponents(null)
+    AgGridModule.withComponents([])
 
   ],
-  providers: [TitleCasePipe],
-  entryComponents:[DropdownComponent],
+  providers: [TitleCasePipe,DatePipe],
+  entryComponents:[DropdownComponent,DropDownFortaskComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

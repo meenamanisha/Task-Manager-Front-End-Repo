@@ -10,9 +10,18 @@ body {
     background: linear-gradient(180deg, #17a2bb 50%, #efefef 50%) no-repeat;
     font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
+.cell-wrap-text {
+    white-space: normal !important;
+    
+}
+/* 
+.ag-header-cell-label {
+    justify-content: center;
+ } */
 .ag-cell { 
+    
     overflow:visible; 
+    /* text-align: center; */
   }
   
   .ag-row {

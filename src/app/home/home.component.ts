@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserServService } from './HomeServices/user-serv.service';
 import { user } from '../models/User';
+import { task } from '../models/task';
 
 @Component({
   selector: 'app-home',
@@ -11,15 +12,42 @@ import { user } from '../models/User';
 export class HomeComponent implements OnInit {
 
 
-  private userRole: string;
-  constructor(private router: Router, private serv: UserServService) { }
-  private us: user;
-  ngOnInit() {
+  private userRole: number;
+  constructor(private router: Router, private serv: UserServService) {
     this.isShow = false;
+   }
 
+  public pendingTask:any[]=[];
+  private lenOfPendingTask=0;
+  private us: user;
+  errorMessage:string;
+  ngOnInit() {
+    this.isShow = this.serv.isShow = false;
     this.serv.currentUser = JSON.parse(localStorage.getItem('user'));
     this.us = this.serv.currentUser;
-    this.userRole = this.us.role.rName.toString();
+    this.userRole = this.us.role.rId;
+    if(this.userRole==2)
+    {
+      this.serv.getAllPendingTask().subscribe(
+        t=>{         
+          
+          t.forEach(e1 => { 
+          
+          e1.tasks.forEach(e2 => {
+            let temp = {id:e1.usrId,name:e1.usrName,tId:e2.tId,tName:e2.tName, tStatus:e2.tStatus, tAllDate:e2.tAllDate, tExpEff:e2.tExpEff,tActEff:e2.tActEff }  
+            this.pendingTask.push(temp);
+          });
+          
+          
+        });          
+          this.lenOfPendingTask = this.pendingTask.length;
+        },
+        err=>{ 
+          
+          this.errorMessage=err
+        }
+      );
+    }
   }
   isShow = false;
   change(s: string) {

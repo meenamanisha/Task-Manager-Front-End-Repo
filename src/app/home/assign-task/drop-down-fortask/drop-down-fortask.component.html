@@ -1,0 +1,11 @@
+<select *ngIf="params.value==null; else showNormal" (change)="selectUser($event.target.value)">
+    <option value="" disabled hidden>--Select--</option>
+    <option [value]="j" *ngFor="let i of allEmployees; let j =index">
+{{i.usrName}}
+    </option>
+</select>
+<ng-template #showNormal>
+    {{params.value}}
+</ng-template>
+
+      

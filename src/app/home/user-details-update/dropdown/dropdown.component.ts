@@ -8,8 +8,7 @@ import { user } from 'src/app/models/User';
   styleUrls: ['./dropdown.component.css']
 })
 export class DropdownComponent  {
-  managers:user[]
-  selectedManager:String = ''
+  managers:user[] 
   params:any
   constructor(private sev:UserServService) {
   }  
@@ -18,7 +17,8 @@ export class DropdownComponent  {
     this.managers = this.sev.managers
     
   }
-  updateManager(){
-    this.sev.updateManager.next({index:this.params.rowIndex,mid:this.selectedManager});
+  updateManager(index){
+    var userT:user =   this.managers[index];  
+    this.sev.updateManager.next({index:this.params.rowIndex,usr:userT});
   }
 }

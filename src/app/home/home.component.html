@@ -17,14 +17,25 @@
       </ul>
     </div>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+
+    <div  class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
+        <li *ngIf="userRole==2" class="nav-item "> 
+          <a class="nav-link" (click)="change('profile')" [routerLink]="['verifyTask']" routerLinkActive="active">
+            <span class="p1 fa-stack fa-1x has-badge" [attr.data-count]="lenOfPendingTask==0?undefined:lenOfPendingTask">              
+              <i class="p3 fa fa-bell fa-stack-1x fa-inverse"></i>
+            </span>
+            &nbsp;&nbsp; 
+          </a>
+          
+        </li>
+        
         <li class="nav-item">
           <a class="nav-link" (click)="change('profile')" [routerLink]="['profile']" routerLinkActive="active"><i
               class="fa fa-user-circle" aria-hidden="true"></i> My Account </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link btn" (click)="logOut()"> <i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+          <a class="nav-link" (click)="logOut()"> <i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
         </li>
       </ul>
 
@@ -33,9 +44,10 @@
 
     <!-- </div> -->
   </nav>
-  <div *ngIf="serv.isShow==false">
+  
+  <div *ngIf="serv.isShow==false">    
 
-    <div *ngIf="(userRole|uppercase)=='ADMIN'">
+    <div *ngIf="userRole==1">
 
       <div class="container">
         <div class="row">
@@ -59,7 +71,7 @@
 
 
     </div>
-    <div *ngIf="(userRole|uppercase)=='MANAGER'">
+    <div *ngIf="userRole==2">
 
 
       <div class="container">
@@ -96,8 +108,8 @@
                   alt="Image"></div>
               <br>
 
-              <div class="panel-footer"><a class="btn btn-success btn-block " (click)="change('userDetails')"
-                  [routerLink]="['userUpdate']">Verify Task</a></div>
+              <div class="panel-footer"><a class="btn btn-success btn-block " (click)="change('userDetails')" 
+                  [routerLink]="['verifyTask']">Verify Task</a></div>
             </div>
           </div>
 
@@ -111,6 +123,6 @@
     </div>
   </div>
   <div *ngIf="serv.isShow==true">
-    <router-outlet></router-outlet>
+    <router-outlet ></router-outlet >
   </div>
 </div>

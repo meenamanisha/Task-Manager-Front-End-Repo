@@ -14,13 +14,13 @@ export class UserDetailsUpdateComponent implements OnInit {
 
 
   constructor(private service: UserServService, private titlePipe: TitleCasePipe, private router: Router, private elRef: ElementRef) { }
-  rowData: user[];
+  rowData:any[];
   columnDefs = [
     { headerName: 'Id', field: 'usrId', width: 110 },
     { headerName: 'Name', field: 'usrName', width: 150 },
     { headerName: 'Role', field: 'role.rName', width: 110 },
 
-    { headerName: 'Manager Id', field: 'usrMId', width: 120, cellRendererFramework: DropdownComponent },
+    { headerName: 'Manager Id', field: 'usrMName', width: 120, cellRendererFramework: DropdownComponent },
     { headerName: 'Email', field: 'usrEmail', width: 200 },
     { headerName: 'Phone no', field: 'usrPhno', width: 110 },
     { headerName: 'Current Address', field: 'usrCurrentAdd' },
@@ -48,26 +48,32 @@ export class UserDetailsUpdateComponent implements OnInit {
       err => this.error = err
     );
 
-  }
-  public len = 0;
+  } 
   updatedUser: user[] = [];
   updateManagers(data: any) {
-    this.rowData[data.index].usrMId = data.mid;
-    this.updatedUser.push(this.rowData[data.index])
-
-    this.updatedUser[this.len].role = null
-    this.len = this.len + 1;
-
+    
+    var tempUsr:user = {...this.rowData[data.index]};
+    tempUsr.role = null
+    tempUsr.usrMId = data.usr.usrId;    
+    this.updatedUser.push(tempUsr);
+    this.rowData[data.index].usrMName = data.usr.usrName;
   }
 
   listOfupdatedUsers: number[] = null
+  gridApi;
+  onGridReady(params)
+  {
+    
+    this.gridApi = params.api;
 
-  onSubmit() {
-
-
-
+  }
+  onSubmit() { 
     this.service.userManagerUpdate(this.updatedUser).subscribe(
-      t => this.listOfupdatedUsers = t,
+      t => {
+        this.listOfupdatedUsers = t;
+        this.gridApi.setRowData(this.rowData);  
+        this.updatedUser = [];          
+      },
       err => this.error = err
 
     );

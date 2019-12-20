@@ -1,0 +1,67 @@
+
+  <div class="container-lg">
+  <div *ngIf="rowData!=null && errorMessage==null" >
+    <br>
+
+
+    <ag-grid-angular #myGrid 
+    [pagination]="true" id="myGrid" paginationPageSize=10 
+      rowSelection='multiple' [rowMultiSelectWithClick]="true" style="height: 390px; width: 100%;"
+
+      [columnDefs]="columnDefs" 
+      (rowClicked)='onRowClicked($event)'
+      [defaultColDef]="defaultColDef"     
+      class="ag-theme-balham" [rowData]="rowData" [suppressCellSelection]="true"
+      (gridReady)="onGridReady($event)">
+    </ag-grid-angular>
+    <button class="btn btn-success" (click)="submit()" >
+        Update
+      </button>
+
+  </div>
+
+  
+  <div *ngIf="listOfSuccessfultask!=null && errorMessage==null">
+    <div class="container col-lg-7 col-lg-offset-2 text-center">
+      <br>
+      <br>
+      <div class="alert alert-success alert-dismissible fade show ">
+        Following tasks' status are updated to complete
+        <h6 class="text-center">
+          <div *ngFor="let item of listOfSuccessfultask">
+
+            <strong>{{item}}</strong>
+          </div>
+
+        </h6>
+      </div>
+    </div>
+
+    <br>
+  </div>
+
+
+  <div *ngIf="errorMessage!=null">
+    <div class="container col-lg-8 col-lg-offset-2 shadow-lg  mb-5 bg-white rounded">
+      <br>
+      
+      <div class="alert alert-light alert-dismissible fade show text-center">
+        <h1>{{errorMessage.status}}</h1>
+        <h1> OOPS!</h1>
+        <strong>Error!</strong> {{errorMessage.message}}
+
+        <br>
+        <a href=""> click </a> here
+
+        <br>
+        
+      </div>
+      <br>
+      <br>
+    </div>
+    <br>
+    <br>
+  </div>
+  
+
+</div>

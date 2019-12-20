@@ -18,6 +18,8 @@ export class RouteGaurdService implements CanActivate {
       return true;
     else if (route.url[0].path == "assignTask" && currentUser.role.rId == 2)
       return true;
+    else if(route.url[0].path=="verifyTask" && currentUser.role.rId==2)  
+      return true;
     else {
       this.router.navigate(['/home']);
       this.service.isShow = false;

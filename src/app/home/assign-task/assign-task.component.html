@@ -1,12 +1,45 @@
 <div class="container-lg">
   <br>
-  <div *ngIf="rowData!=null">
+  <div *ngIf="allEmployees==null">
 
-    <ag-grid-angular #myGrid [enableSorting]="true" [pagination]="true" [enableFilter]="true" paginationPageSize=10
-      rowSelection='multiple' [rowMultiSelectWithClick]="true" style="height: 390px; width: 100%;"
-      class="ag-theme-balham" [defaultColDef]="defaultColDef" [rowData]="rowData" [suppressCellSelection]="true"
-      [columnDefs]="columnDefs">
-    </ag-grid-angular>
+    <ag-grid-angular #myGrid     
+      [pagination]="true" 
+      id="myGrid"
+      paginationPageSize=10
+      [getRowHeight]="getRowHeight"
+      rowSelection='multiple' 
+      [rowMultiSelectWithClick]="true" 
+      style="height: 390px; width: 100%;"
+      class="ag-theme-balham" 
+      [defaultColDef]="defaultColDef" 
+      [rowData]="rowData"  
+      [suppressCellSelection]="true"
+      [columnDefs]="columnDefs"      
+      (gridReady)="onGridReady($event)"
+      >
+    </ag-grid-angular> 
+    <button class="btn btn-success" (click)="submit()"[disabled]="userTaskList.length<1"> 
+      Update
+  </button>
+
+  </div>
+
+  <div *ngIf="lisOfUser!=null && errorMessage==null">
+    <div class="container col-lg-7 col-lg-offset-2 text-center">
+      <br>
+      <br>
+      <div class="alert alert-success alert-dismissible fade show ">
+        Following employee's has been assigned to task
+        <h6 class="text-center">
+          <div *ngFor="let item of lisOfUser">
+
+            <strong>{{item}}</strong>
+          </div>
+
+        </h6>
+      </div>
+    </div>
+
   </div>
 
 
@@ -22,7 +55,7 @@
         <strong>Error!</strong> {{errorMessage.message}}
 
         <br>
-        For sign up <a href=""> click </a> here
+        <a href=""> click </a> here
 
         <br>
 

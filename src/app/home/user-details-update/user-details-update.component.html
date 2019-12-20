@@ -1,11 +1,22 @@
 <br>
 <div class="container-lg">
-  <div *ngIf="listOfupdatedUsers==null &&rowData!=null;">
+  <div *ngIf="rowData!=null;">
 
 
-    <ag-grid-angular #myGrid [enableSorting]="true" [pagination]="true" [enableFilter]="true" paginationPageSize=10
-      rowSelection='multiple' [rowMultiSelectWithClick]="true" style="height: 390px;" class="ag-theme-balham"
-      [rowData]="rowData" [suppressCellSelection]="true" [columnDefs]="columnDefs">
+    <ag-grid-angular #myGrid 
+    [enableSorting]="true" 
+    [pagination]="true" 
+    [enableFilter]="true" 
+    paginationPageSize=10
+      rowSelection='multiple' 
+      [rowMultiSelectWithClick]="true" 
+      style="height: 390px;" 
+      class="ag-theme-balham"
+      [rowData]="rowData" 
+      [suppressCellSelection]="true"       
+      [columnDefs]="columnDefs"
+      (gridReady)="onGridReady($event)"
+      >
     </ag-grid-angular>
 
     <button class="btn btn-success" (click)="onSubmit()">Submit</button>

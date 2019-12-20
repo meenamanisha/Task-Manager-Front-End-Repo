@@ -6,6 +6,9 @@ export const paths = {
   userManagers:"employees/Managers",
   userUpdateManager:"employees/updated",
   createTask:"tasks/taskcreation",
-  getTask:"tasks/allTasks"
+  getTask:"tasks/allTasks",
+  assignTask:"tasks/TaskToUser",
+  pendingTask:"tasks/pendingTask",
+  verifyTask:"tasks/verifyTask"
 
 };

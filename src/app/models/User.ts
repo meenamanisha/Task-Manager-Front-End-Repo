@@ -1,4 +1,5 @@
 import { role } from './role';
+import { task } from './task';
 
 export class user {
 	usrId: number;
@@ -13,4 +14,5 @@ export class user {
 	usrProfileImage: string;
 	usrMName: String;
 	usrMEmail: String;
+	tasks:task[];
 }

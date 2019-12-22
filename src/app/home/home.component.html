@@ -20,29 +20,35 @@
 
     <div  class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
-        <li *ngIf="userRole==2" class="nav-item "> 
-          <a class="nav-link" (click)="change('profile')" [routerLink]="['verifyTask']" routerLinkActive="active">
+        <li *ngIf="userRole==2 || userRole==3 " class="nav-item "> 
+
+          <a  *ngIf="userRole==2" class="nav-link" (click)="change('profile')" [routerLink]="['verifyTask']" routerLinkActive="active">          
             <span class="p1 fa-stack fa-1x has-badge" [attr.data-count]="lenOfPendingTask==0?undefined:lenOfPendingTask">              
               <i class="p3 fa fa-bell fa-stack-1x fa-inverse"></i>
             </span>
             &nbsp;&nbsp; 
           </a>
-          
+          <a  *ngIf="userRole==3" class="nav-link" (click)="change('profile')" [routerLink]="['employeeTask']" routerLinkActive="active">          
+            <span class="p1 fa-stack fa-1x has-badge" [attr.data-count]="lenOfPendingTask==0?undefined:lenOfPendingTask">              
+              <i class="p3 fa fa-bell fa-stack-1x fa-inverse"></i>
+            </span>
+            &nbsp;&nbsp; 
+          </a>
         </li>
         
         <li class="nav-item">
           <a class="nav-link" (click)="change('profile')" [routerLink]="['profile']" routerLinkActive="active"><i
               class="fa fa-user-circle" aria-hidden="true"></i> My Account </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="logOut()"> <i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+        <li class="nav-item">          
+          <a class="nav-link " (click)="logOut()">
+            
+             <i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
         </li>
       </ul>
 
 
     </div>
-
-    <!-- </div> -->
   </nav>
   
   <div *ngIf="serv.isShow==false">    
@@ -120,6 +126,29 @@
 
 
 
+    </div>
+
+    <div *ngIf="userRole==3">
+      
+      <div class="container">
+        <div class="row">
+          <span class="col-sm-4"></span>
+          <div class="col-sm-3 ">
+            <br>
+            <div class="panel panel-primary">
+              <div class="panel-body"><img src="assets/task.png" class="img-responsive" style="width: 100%;"
+                  alt="Image"></div>
+              <br>
+
+              <div class="panel-footer"><a class="btn btn-success btn-block " (click)="change('employeeTask')"
+                  [routerLink]="['employeeTask']">Check assigned task</a></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div><br>
+      
     </div>
   </div>
   <div *ngIf="serv.isShow==true">

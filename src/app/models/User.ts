@@ -14,5 +14,5 @@ export class user {
 	usrProfileImage: string;
 	usrMName: String;
 	usrMEmail: String;
-	tasks:task[];
+	tasks:task[] = [];
 }

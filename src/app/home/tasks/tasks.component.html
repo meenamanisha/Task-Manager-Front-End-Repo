@@ -36,7 +36,8 @@
             <div class="form-group row">
               <label for="tDesc" class="col-sm-3 col-form-label font-weight-bold">Description</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="tDesc" formControlName="tDesc">
+                <!-- <input type="text" class="form-control" name="tDesc" formControlName="tDesc"> -->
+                <textarea  class="form-control" name="tDesc" formControlName="tDesc" cols="40" rows="4"></textarea>
                 <p *ngIf="!taskForm.controls.tDesc.valid && taskForm.controls.tDesc.dirty" class="alert alert-danger">
                   Please provide a description for task!</p>
 

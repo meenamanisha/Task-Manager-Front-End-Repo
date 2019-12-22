@@ -9,6 +9,8 @@ export const paths = {
   getTask:"tasks/allTasks",
   assignTask:"tasks/TaskToUser",
   pendingTask:"tasks/pendingTask",
-  verifyTask:"tasks/verifyTask"
+  verifyTask:"tasks/verifyTask",
+  assignedTaskToUser:"tasks/getAssignedTask",
+  userProcessingTask:"tasks/completeTask",
 
 };

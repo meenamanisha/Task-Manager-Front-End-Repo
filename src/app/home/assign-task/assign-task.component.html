@@ -1,6 +1,6 @@
 <div class="container-lg">
   <br>
-  <div *ngIf="allEmployees==null">
+  <div *ngIf="allEmployees==null && errorMessage==null">
 
     <ag-grid-angular #myGrid     
       [pagination]="true" 
@@ -9,7 +9,7 @@
       [getRowHeight]="getRowHeight"
       rowSelection='multiple' 
       [rowMultiSelectWithClick]="true" 
-      style="height: 390px; width: 100%;"
+      style="height: 500px; width: 100%;"
       class="ag-theme-balham" 
       [defaultColDef]="defaultColDef" 
       [rowData]="rowData"  
@@ -18,7 +18,7 @@
       (gridReady)="onGridReady($event)"
       >
     </ag-grid-angular> 
-    <button class="btn btn-success" (click)="submit()"[disabled]="userTaskList.length<1"> 
+    <button class="btn btn-success" (click)="submit()"[disabled]="m.size<1"> 
       Update
   </button>
 
@@ -38,6 +38,10 @@
 
         </h6>
       </div>
+      <br>
+      <br>
+      <br>
+      
     </div>
 
   </div>

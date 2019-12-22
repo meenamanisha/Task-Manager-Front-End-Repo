@@ -10,6 +10,7 @@ export class task {
 	tAllDate: Date;
 	tCompDate: Date;
 	tDesc: String;
+	taskOwner:String;
 
 
 }

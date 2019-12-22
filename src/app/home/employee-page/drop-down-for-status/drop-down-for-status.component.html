@@ -1,0 +1,11 @@
+<select *ngIf="params.value!='COMPLETED'; else showNormal" (change)="selectUser($event.target.value)">
+    <option value="" disabled hidden>--Select--</option>
+    <option [value]="j" *ngFor="let i of taskS; let j =index">
+{{i}}
+    </option>
+</select>
+<ng-template #showNormal>
+    {{params.value}}
+</ng-template>
+
+      

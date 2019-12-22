@@ -10,6 +10,7 @@ import { RouteGaurdService } from './home/HomeServices/route-gaurd.service';
 import { TasksComponent } from './home/tasks/tasks.component';
 import { AssignTaskComponent } from './home/assign-task/assign-task.component';
 import { VerfifyTaskComponent } from './home/verfify-task/verfify-task.component';
+import { EmployeePageComponent } from './home/employee-page/employee-page.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
     {path:'userUpdate',component:UserDetailsUpdateComponent,canActivate:[RouteGaurdService]},
     {path:'createTask',component:TasksComponent,canActivate:[RouteGaurdService]},
     {path:'assignTask',component:AssignTaskComponent,canActivate:[RouteGaurdService]},
-    {path:'verifyTask',component:VerfifyTaskComponent,canActivate:[RouteGaurdService]}
+    {path:'verifyTask',component:VerfifyTaskComponent,canActivate:[RouteGaurdService]},
+    {path:'employeeTask',component:EmployeePageComponent,canActivate:[RouteGaurdService]},
   ]},
   
   {path:'login',component:LoginComponent,runGuardsAndResolvers: 'always'},   

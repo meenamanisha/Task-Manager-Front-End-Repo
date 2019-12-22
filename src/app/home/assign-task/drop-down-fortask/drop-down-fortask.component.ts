@@ -23,6 +23,6 @@ export class DropDownFortaskComponent {
   selectUser(index)
   {    
     var userT:user =   this.allEmployees[index];  
-    this.service.userChange.next({task:this.params.data,usr:userT,ind:this.params.rowIndex});
+    this.service.userChange.next({task:this.params.data,usr:userT,ind:this.params.rowIndex,usrInd:index});
   } 
 } 

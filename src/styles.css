@@ -20,7 +20,7 @@ body {
  } */
 .ag-cell { 
     
-    overflow:visible; 
+    overflow:visible !important; 
     /* text-align: center; */
   }
   

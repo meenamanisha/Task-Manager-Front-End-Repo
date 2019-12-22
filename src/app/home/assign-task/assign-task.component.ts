@@ -44,7 +44,7 @@ export class AssignTaskComponent implements OnInit {
     ];
     this.getRowHeight = function (params) {
       if (params.data.tDesc != null)
-        return 28 * (Math.floor(params.data.tDesc.length / 60) + 1);
+        return 28 * (Math.floor(params.data.tDesc.length / 55) + 1);
       return 28;
     };
 
@@ -74,28 +74,40 @@ export class AssignTaskComponent implements OnInit {
 
 
 
-  }
-  userTaskList: user[] = [];
-
+  }  
+  private m = new Map<number, user>(); 
   changeUser(data) {
     this.rowData[data.ind].usr = data.usr.usrName
-    let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss');
-    data.task.tAllDate = date;
-    data.task.tStatus = taskStatus.IN_PROCESS
-    data.usr.tasks = [];
-    let tempTask = { ...data.task };
-
-    delete tempTask['usr'];
-    data.usr.tasks.push(tempTask);
-    this.userTaskList.push(data.usr)
+    this.rowData[data.ind].tStatus=taskStatus.IN_PROCESS
+    let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss');        
+    let tempTask = { ...data.task };  
+    delete tempTask['usr'];  
+    tempTask.tAllDate=date;
+    tempTask.tStatus = taskStatus.IN_PROCESS   
+    if(this.m.has(data.usrInd))
+    {
+      this.m.get(data.usrInd).tasks.push(tempTask);
+    }
+    else
+    {
+      data.usr.tasks = [];      
+      
+      data.usr.tasks.push(tempTask);
+      this.m.set(data.usrInd,data.usr)
+    }        
   }
   lisOfUser: number[] = null
   submit() {
-    // console.log(this.userTaskList)
-    this.service.assignTaskToUser(this.userTaskList).subscribe(
+    let usrTaskList:user[] = [];      
+    this.m.forEach((value: user, key: number) => {
+      usrTaskList.push(value)
+      
+  });  
+    this.service.assignTaskToUser(usrTaskList).subscribe(
       t => {
         this.lisOfUser = t;
         this.gridApi.setRowData(this.rowData);
+        this.m.clear();
       },
       err => this.errorMessage = err
     );

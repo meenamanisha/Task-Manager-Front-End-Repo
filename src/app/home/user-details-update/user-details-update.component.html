@@ -1,6 +1,6 @@
 <br>
 <div class="container-lg">
-  <div *ngIf="rowData!=null;">
+  <div *ngIf="rowData!=null && error==null">
 
 
     <ag-grid-angular #myGrid 
@@ -19,7 +19,7 @@
       >
     </ag-grid-angular>
 
-    <button class="btn btn-success" (click)="onSubmit()">Submit</button>
+    <button class="btn btn-success" (click)="onSubmit()" [disabled]="updatedUser.length==0">Submit</button>
 
   </div>
   <div *ngIf="listOfupdatedUsers!=null && error==null">

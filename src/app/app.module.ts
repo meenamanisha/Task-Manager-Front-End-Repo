@@ -21,6 +21,8 @@ import { TasksComponent } from './home/tasks/tasks.component';
 import { AssignTaskComponent } from './home/assign-task/assign-task.component';
 import { DropDownFortaskComponent } from './home/assign-task/drop-down-fortask/drop-down-fortask.component';
 import { VerfifyTaskComponent } from './home/verfify-task/verfify-task.component';
+import { EmployeePageComponent } from './home/employee-page/employee-page.component';
+import { DropDownForStatusComponent } from './home/employee-page/drop-down-for-status/drop-down-for-status.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,9 @@ import { VerfifyTaskComponent } from './home/verfify-task/verfify-task.component
     TasksComponent,
     AssignTaskComponent,
     DropDownFortaskComponent,
-    VerfifyTaskComponent
+    VerfifyTaskComponent,
+    EmployeePageComponent,
+    DropDownForStatusComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,7 @@ import { VerfifyTaskComponent } from './home/verfify-task/verfify-task.component
 
   ],
   providers: [TitleCasePipe,DatePipe],
-  entryComponents:[DropdownComponent,DropDownFortaskComponent],
+  entryComponents:[DropdownComponent,DropDownFortaskComponent,DropDownForStatusComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

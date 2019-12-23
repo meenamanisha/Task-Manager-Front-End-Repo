@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { taskStatus } from 'src/app/models/TaskStatus';
+import { Component, OnInit, Injector } from '@angular/core'; 
+import { EmployeePageComponent } from '../employee-page.component';
 
 @Component({
   selector: 'app-drop-down-for-status',
@@ -9,19 +9,24 @@ import { taskStatus } from 'src/app/models/TaskStatus';
 export class DropDownForStatusComponent {
 
   private params;
-  private taskS:string[] = [];
-  constructor() { }
+  private taskS:string[] = ["CANCELLED","IN_PROCESS","PENDING_TO_VERFIFY"];
+  private rows:any[];
+  private index:number;
+  constructor(private inject:Injector) { 
+    // let parent = this.inject.get(EmployeePageComponent)
+    // this.rows = parent.rowData;    
+  }
   selectUser(event)
   {
-   
-    
+    this.params.value = this.taskS[event];
+    console.log(this.taskS[event]);      
+    console.log(this.index);
+         
   }
   agInit(params) {
+    params.value = "COMPLETED"
     this.params = params;
-    this.taskS.push("CANCELLED");
-    this.taskS.push("IN_PROCESS");
-    this.taskS.push("PENDING_TO_VERFIFY");
-
+    this.index = params.rowIndex    
     
   }
 

@@ -1,81 +1,81 @@
+<div class="container-lg">
+  <div *ngIf="isShow==true  && errorMessage==null; else show">
+    <br>
 
-  <div class="container-lg">
-    <div *ngIf="rowData!=null && errorMessage==null" >
-      <br>
-      <div >
-        <select [(ngModel)]="pageSize" (change)="changePage(e)">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-  
-  
-      <ag-grid-angular #myGrid 
-      [pagination]="true" id="myGrid"
-      [paginationPageSize]=pageSize 
-      style="height: 390px; width: 100%;"
-      
-      [columnDefs]="columnDefs" 
-      [defaultColDef]="defaultColDef"
-      [getRowHeight]="getRowHeight"     
-      class="ag-theme-balham" [rowData]="rowData" 
-      [suppressCellSelection]="true"
+
+    <ag-grid-angular #myGrid [pagination]="true" id="myGrid" [paginationPageSize]=pageSize
+      style="height: 390px; width: 100%;" 
+      [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" 
+      rowSelection='multiple'  
+      (rowSelected)="onSelect($event)"
+      [rowMultiSelectWithClick]="true" 
+      [getRowHeight]="getRowHeight" class="ag-theme-balham" [rowData]="rowData" [suppressCellSelection]="true"
       (gridReady)="onGridReady($event)">
     </ag-grid-angular>
-    <button class="btn btn-success" (click)="submit()" >
-        Update
+    <button class="btn btn-success" (click)="submit()">
+      Update
     </button>
+    <!-- rowSelection='multiple' 
+     -->
     
-</div>
-<!-- (rowClicked)='onRowClicked($event)' -->
-<!-- rowSelection='multiple'  -->
+  </div> 
 
-<!-- [rowMultiSelectWithClick]="true"  -->
+  <ng-template #show>
+    <div *ngIf="listOfSuccessfultask==null" class="container col-lg-7 col-lg-offset-2 text-center">
+      <br>
+      <br>
+      <div class="alert alert-success alert-dismissible fade show ">
+        <h1>
+          No Task To Show!!!!!!!!
+        </h1>
+      </div>
+    </div>
+  </ng-template>
+  
 
-    <div *ngIf="listOfSuccessfultask!=null && errorMessage==null">
-      <div class="container col-lg-7 col-lg-offset-2 text-center">
-        <br>
-        <br>
-        <div class="alert alert-success alert-dismissible fade show ">
-          Following tasks' are completed
-          <h6 class="text-center">
-            <div *ngFor="let item of listOfSuccessfultask">
-  
-              <strong>{{item}}</strong>
-            </div>
-  
-          </h6>
-        </div>
+
+  <div *ngIf="listOfSuccessfultask!=null && errorMessage==null">
+    <div class="container col-lg-7 col-lg-offset-2 text-center">
+      <br>
+      <br>
+      <div class="alert alert-success alert-dismissible fade show ">
+        Following tasks' are completed
+        <h6 class="text-center">
+          <div *ngFor="let item of listOfSuccessfultask">
+
+            <strong>{{item}}</strong>
+          </div>
+
+        </h6>
       </div>
-  
-      <br>
     </div>
-  
-  
-    <div *ngIf="errorMessage!=null">
-      <div class="container col-lg-8 col-lg-offset-2 shadow-lg  mb-5 bg-white rounded">
-        <br>
-        
-        <div class="alert alert-light alert-dismissible fade show text-center">
-          <h1>{{errorMessage.status}}</h1>
-          <h1> OOPS!</h1>
-          <strong>Error!</strong> {{errorMessage.message}}
-  
-          <br>
-          <a href=""> click </a> here
-  
-          <br>
-          
-        </div>
-        <br>
-        <br>
-      </div>
-      <br>
-      <br>
-    </div>
-    
-  
+
+    <br>
   </div>
+
+
+  <div *ngIf="errorMessage!=null">
+    <div class="container col-lg-8 col-lg-offset-2 shadow-lg  mb-5 bg-white rounded">
+      <br>
+      <br>
+      <br>
+      <div class="alert alert-light alert-dismissible fade show text-center">
+        <h1>{{errorMessage.status}}</h1>
+        <h1> OOPS!</h1>
+        <strong>Error!</strong> {{errorMessage.message}}
+
+        <br>
+        <a href=""> click </a> here
+
+        <br>
+
+      </div>
+      <br>
+      <br>
+    </div>
+    <br>
+    <br>
+  </div>
+
+
+</div>

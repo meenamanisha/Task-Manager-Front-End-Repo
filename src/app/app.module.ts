@@ -23,6 +23,7 @@ import { DropDownFortaskComponent } from './home/assign-task/drop-down-fortask/d
 import { VerfifyTaskComponent } from './home/verfify-task/verfify-task.component';
 import { EmployeePageComponent } from './home/employee-page/employee-page.component';
 import { DropDownForStatusComponent } from './home/employee-page/drop-down-for-status/drop-down-for-status.component';
+import { TaskviewComponent } from './home/taskview/taskview.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,8 @@ import { DropDownForStatusComponent } from './home/employee-page/drop-down-for-s
     DropDownFortaskComponent,
     VerfifyTaskComponent,
     EmployeePageComponent,
-    DropDownForStatusComponent
+    DropDownForStatusComponent,
+    TaskviewComponent
   ],
   imports: [
     BrowserModule,

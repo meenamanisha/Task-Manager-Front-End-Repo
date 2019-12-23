@@ -22,6 +22,8 @@ export class DropDownFortaskComponent {
   }
   selectUser(index)
   {    
+    if(index=='')
+      return;    
     var userT:user =   this.allEmployees[index];  
     this.service.userChange.next({task:this.params.data,usr:userT,ind:this.params.rowIndex,usrInd:index});
   } 

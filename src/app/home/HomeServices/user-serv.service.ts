@@ -34,7 +34,7 @@ export class UserServService {
     
     return this.http.get<any>(uri).pipe(retry(1), catchError(this.handleError));
   }
-  userProcessedTask(tasks:task): Observable<any> {
+  userProcessedTask(tasks:task[]): Observable<any> {
     const uri = environment.baseURI + paths.proPath + paths.userProcessingTask + "/" + this.currentUser.usrId;
     return this.http.put<any>(uri,tasks).pipe(retry(1), catchError(this.handleError));
   }

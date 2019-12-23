@@ -6,7 +6,9 @@
 
     <ag-grid-angular #myGrid 
     [pagination]="true" id="myGrid" paginationPageSize=10 
-      rowSelection='multiple' [rowMultiSelectWithClick]="true" style="height: 390px; width: 100%;"
+      rowSelection='multiple' 
+      [rowMultiSelectWithClick]="true" 
+      style="height: 390px; width: 100%;"
 
       [columnDefs]="columnDefs" 
       (rowClicked)='onRowClicked($event)'

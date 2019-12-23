@@ -17,9 +17,9 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private serv: UserServService,private datePipe:DatePipe) {
     this.isShow = false;
   }
-
+  public remainingTask:any[]=[];
   public pendingTask: any[] = [];
-  private lenOfPendingTask = 0;
+  public lenOfPendingTask = 0;
   private us: user;
   errorMessage: string;
   ngOnInit() {
@@ -51,10 +51,13 @@ export class HomeComponent implements OnInit {
       this.serv.getAssignedTask().subscribe(
         t => { 
           t.map(items=>{
-            items.tAllDate = this.datePipe.transform(items.tAllDate)
+            // items.tAllDate = this.datePipe.transform(items.tAllDate)
+            if(items.tStatus=="IN_PROCESS")
+            this.pendingTask.push(items);
+            else
+            this.remainingTask.push(items)
           })
-          
-          this.pendingTask =t;
+                    
           this.lenOfPendingTask = this.pendingTask.length;
         },
         err => {

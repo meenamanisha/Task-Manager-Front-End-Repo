@@ -50,7 +50,8 @@ export class UserDetailsUpdateComponent implements OnInit {
 
   } 
   updatedUser: user[] = [];
-  updateManagers(data: any) {
+  updateManagers(data: any) 
+  {
     
     var tempUsr:user = {...this.rowData[data.index]};
     tempUsr.role = null

@@ -44,8 +44,8 @@ export class AssignTaskComponent implements OnInit {
     ];
     this.getRowHeight = function (params) {
       if (params.data.tDesc != null)
-        return 28 * (Math.floor(params.data.tDesc.length / 55) + 1);
-      return 28;
+        return 31 * (Math.floor(params.data.tDesc.length / 49) + 1);
+      return 31;
     };
 
   }

@@ -57,44 +57,69 @@ export class VerfifyTaskComponent implements OnInit {
 
   }
   listOfSuccessfultask:number[]; 
-  private m = new Map<number, task[]>();    
+    
+  
+  onSelect(c) {  
+  }
+  
   onRowClicked(params)
   {
-    let i = params.rowIndex;
-    
-    if(!this.m.has(this.rowData[i].id))
-      {
-        this.m.set(this.rowData[i].id,[]);
-      }
-      let t:task[] = this.m.get(this.rowData[i].id);
-      let  tk:task = new task();
-      tk.tId = this.rowData[i].tId
-
-      t.push(tk); 
-      this.rowData[i].tStatus=taskStatus.COMPLETED;
+    if(params.node.selected )
+    {
+      this.rowData[params.rowIndex].tStatus=taskStatus.COMPLETED;
+      delete this.rowData[params.rowIndex]
       
-      delete this.rowData[i];
-    
+    }
+
+    else
+    {
+      this.rowData.splice(params.rowIndex,0,params.data);
+    }          
 
   }
   submit()
   {
-    let selectedTask:user[] = [];      
-    this.m.forEach((value: task[], key: number) => {
-      let u:user = new user;
-      u.usrId = key;      
-      u.tasks = value;
-      selectedTask.push(u);      
-  });
+    let selectedTask:user[] = []; 
+
+    let m = new Map<number, user>();    
+    for(let item of this.gridApi.getSelectedRows())
+    {    
+      console.log(item);
+      
+      if(!m.has(item.id))
+        {
+          let ur:user = new user();
+          ur.tasks = []
+          ur.usrId = item.id
+          selectedTask.push(ur);      
+          m.set(item.id,ur);
+          console.log(selectedTask);
+          
+        }
+        let t = m.get(item.id);      
+        let  tk:task = new task();
+        tk.tId = item.tId
+        t.tasks.push(tk);         
+    }
+  //   m.forEach((value: user, key: number) => {
+  //     let u:user =value;
+  // });
+  let parentComponent = this.injector.get(HomeComponent);
+  console.log(selectedTask);
   
   
   this.service.verifyPendingTask(selectedTask).subscribe(
     t=>{
       this.listOfSuccessfultask = t,
-        this.gridApi.setRowData(this.rowData);  
-
+      this.gridApi.setRowData(this.rowData);  
+      parentComponent.pendingTask = this.rowData;
+      parentComponent.lenOfPendingTask=this.rowData.length
     },
-    err=>this.errorMessage = err
+    err=>{this.errorMessage = err
+
+      this.rowData = parentComponent.pendingTask;
+
+    }
   );    
   }
 }

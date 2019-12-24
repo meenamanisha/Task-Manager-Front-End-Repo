@@ -27,7 +27,11 @@ body {
   .ag-row {
       z-index: 0;
   }
-  
+  .ag-row .ag-cell {
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center;
+  }
   .ag-row.ag-row-focus {
       z-index: 1;
   }

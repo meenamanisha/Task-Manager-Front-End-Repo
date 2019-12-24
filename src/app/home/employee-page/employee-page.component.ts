@@ -46,7 +46,7 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
         refData: statusMapping,
       },
       { headerName: 'Allocation Date', field: 'tAllDate', width: 130, cellRenderer: (data) => { return this.datePipe.transform(data.value) } },
-      { headerName: 'Expected Effort', field: 'tExpEff', width: 130 },
+      { headerName: 'Expected Effort(hrs)', field: 'tExpEff', width: 130 },
       {
         headerName: 'Description', field: 'tDesc', width: 280,
         cellStyle: { "white-space": "normal" }

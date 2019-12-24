@@ -96,6 +96,8 @@ export class AssignTaskComponent implements OnInit {
       this.m.set(data.usrInd,data.usr)
     }        
   }
+
+  
   lisOfUser: number[] = null
   submit() {
     let usrTaskList:user[] = [];      

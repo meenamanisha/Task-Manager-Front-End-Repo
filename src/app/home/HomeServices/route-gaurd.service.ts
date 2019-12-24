@@ -24,7 +24,10 @@ export class RouteGaurdService implements CanActivate {
       return true;
     else if (route.url[0].path == "viewHistory" && currentUser.role.rId == 3)
       return true;
+      else if (route.url[0].path == "dashboard" && currentUser.role.rId == 2)
+      return true;
     else {
+      
       this.router.navigate(['/home']);
       this.service.isShow = false;
     }

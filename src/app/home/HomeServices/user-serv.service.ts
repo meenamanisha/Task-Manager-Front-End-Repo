@@ -91,8 +91,8 @@ export class UserServService {
   }
 
 
-  getAllTask(id: number): Observable<any> {
-    const uri = environment.baseURI + paths.proPath + paths.getTask + "/" + id;
+  getAllTask(): Observable<any> {
+    const uri = environment.baseURI + paths.proPath + paths.getTask + "/" + this.currentUser.usrId;
     return this.http.get<any>(uri).pipe(retry(1), catchError(this.handleError));
   }
 }

@@ -60,7 +60,7 @@ export class AssignTaskComponent implements OnInit {
     this.currentUser = this.service.currentUser;
     this.service.userChange.subscribe(data => this.changeUser(data))
 
-    this.service.getAllTask(this.currentUser.usrId).subscribe(
+    this.service.getAllTask().subscribe(
       t => {
 
         this.rowData = t

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserServService } from '../HomeServices/user-serv.service';
 import { user } from 'src/app/models/User';
-import { TitleCasePipe } from '@angular/common';
+import { TitleCasePipe, DatePipe } from '@angular/common';
 import { taskStatus } from 'src/app/models/TaskStatus';
 
 @Component({
@@ -21,7 +21,7 @@ export class TasksComponent implements OnInit {
   errorMessage: String;
   successMessage: String;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private service: UserServService, private titlePipe: TitleCasePipe) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private service: UserServService, private titlePipe: TitleCasePipe, private datePipe:DatePipe) {
 
     this.currentUser = this.service.currentUser;
   }
@@ -35,7 +35,8 @@ export class TasksComponent implements OnInit {
       tOwner: [this.currentUser.usrId, Validators.required],
       tDesc: ['', Validators.required],
 
-      tStatus: [taskStatus.NEW]
+      tStatus: [taskStatus.NEW],
+      tCreatDate:['']
     });
 
   }
@@ -44,7 +45,8 @@ export class TasksComponent implements OnInit {
 
 
     this.isSubmit = true;
-
+    let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');      
+    this.taskForm.controls['tCreatDate'].setValue(date);
     this.service.createTask(this.taskForm.value).subscribe(
       t => this.successMessage = t.message,
       err => this.errorMessage = err

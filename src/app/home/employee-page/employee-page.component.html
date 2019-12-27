@@ -6,9 +6,8 @@
     <ag-grid-angular #myGrid [pagination]="true" id="myGrid" [paginationPageSize]=pageSize
       style="height: 390px; width: 100%;" 
       [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" 
-      rowSelection='multiple'  
+     
       (rowSelected)="onSelect($event)"
-      [rowMultiSelectWithClick]="true" 
       [getRowHeight]="getRowHeight" class="ag-theme-balham" [rowData]="rowData" [suppressCellSelection]="true"
       (gridReady)="onGridReady($event)">
     </ag-grid-angular>

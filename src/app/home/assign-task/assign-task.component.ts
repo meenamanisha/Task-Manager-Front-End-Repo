@@ -30,10 +30,11 @@ export class AssignTaskComponent implements OnInit {
 
 
     this.columnDefs = [
-      { headerName: 'Task Id', field: 'tId', width: 130 },
-      { headerName: 'Task Name', field: 'tName' },
-      { headerName: 'Status', field: 'tStatus', width: 130 },
+      { headerName: 'Task Id', field: 'tId', width: 110 },
+      { headerName: 'Task Name', field: 'tName', width: 130 },
+      { headerName: 'Creation', field: 'tStatus', width: 130 },
       { headerName: 'Expected Effort', field: 'tExpEff', width: 130 },
+      {headerName: 'Creation Date', field: 'tCreatDate', width: 130 ,cellRenderer: (data) => { return this.datePipe.transform(data.value) } },
       {
         headerName: 'Description', field: 'tDesc', width: 300,
         cellStyle: { "white-space": "normal" }
@@ -41,6 +42,7 @@ export class AssignTaskComponent implements OnInit {
       {
         headerName: 'Tassk Assign to', field: 'usr', width: 200, cellRendererFramework: DropDownFortaskComponent
       }
+
     ];
     this.getRowHeight = function (params) {
       if (params.data.tDesc != null)
@@ -51,7 +53,7 @@ export class AssignTaskComponent implements OnInit {
   }
   onGridReady(params) {
     this.gridApi = params.api;
-    // params.api.sizeColumnsToFit();
+    this.gridApi.sizeColumnsToFit();
 
   }
 

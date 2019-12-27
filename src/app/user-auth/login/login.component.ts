@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
         this.usr = t,
           this.usr.usrName = this.titlecase.transform(this.usr.usrName);
         localStorage.setItem('user', JSON.stringify(this.usr));
+        localStorage.setItem('penT', JSON.stringify(this.usr.pendingTask));
         this.router.navigate(['/home']);
       },
       err => {

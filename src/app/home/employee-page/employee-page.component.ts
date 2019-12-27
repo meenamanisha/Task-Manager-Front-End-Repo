@@ -58,8 +58,8 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
 
     this.getRowHeight = function (params) {
       if (params.data.tDesc != null)
-        return 32 * (Math.floor(params.data.tDesc.length / 50) + 1);
-      return 32;
+      return 31 * (Math.floor(params.data.tDesc.length / 49) + 1);
+      return 31;
     };
   }
 
@@ -82,19 +82,25 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
   // private mapOfTask = new Map<number,task>()
   public isShow=true;
   onSelect(c) {     
-    if(c.data.tStatus!="IN_PROCESS")
-    {
+   
       if(c.node.selected )
       {      
           // this.mapOfTask.set(c.rowIndex,c.data);
-          this.rowData.splice(c.rowIndex,1)      
+
+          if(c.data.tStatus!="IN_PROCESS")
+          {
+            this.rowData.splice(c.rowIndex,1)      
+          }
       }
       else
       {
-        // this.mapOfTask.delete(c.rowIndex);
-        this.rowData.splice(c.rowIndex,0,c.data);
+        if(c.data.tStatus!="IN_PROCESS")
+        {        
+          this.rowData.splice(c.rowIndex,0,c.data); 
+        }
       }
-    }       
+    console.log(this.rowData);
+           
     
   }
 
@@ -105,9 +111,9 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
       if(i.tStatus=='IN_PROCESS')
         continue;
 
-      let date1 = this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss');
+      let date1 = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
       i.tCompDate = date1;
-      let date2 = this.datePipe.transform(i.tAllDate, 'yyyy-MM-dd hh:mm:ss');
+      let date2 = this.datePipe.transform(i.tAllDate, 'yyyy-MM-dd HH:mm:ss');
       let d1:Date = new Date(date1);
       let d2:Date = new Date(date2); 
       var msec = d1.getTime() - d2.getTime();
@@ -123,8 +129,11 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
     this.service.userProcessedTask(tasks).subscribe(
       t=>{                
         this.listOfSuccessfultask = t
-        this.gridApi.setRowData(this.rowData);             
-        this.service.len = this.rowData.length
+        this.gridApi.setRowData(this.rowData);    
+        console.log(this.rowData);
+                 
+        localStorage.setItem('penT', JSON.stringify(this.rowData.length));
+        this.service.len = this.rowData.length    
              
 
       },
@@ -140,7 +149,11 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
     // let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss');        
 
     this.service.getAllTask("assignedTask").subscribe(
-      t=> this.rowData = t,
+      t=> {
+        this.rowData = t,
+        localStorage.setItem('penT', JSON.stringify(this.rowData.length));
+        this.service.len = this.rowData.length 
+      },
       err=>this.errorMessage=err
     );
 

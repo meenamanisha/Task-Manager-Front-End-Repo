@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
     this.us = this.serv.currentUser;
     this.userRole = this.us.role.rId; 
 
+    console.log(this.userRole);
     
     this.serv.len = parseInt(localStorage.getItem('penT'));
   }
@@ -46,6 +47,7 @@ export class HomeComponent implements OnInit {
   }
   logOut() {
     localStorage.removeItem("user")
+    localStorage.removeItem("penT")
     localStorage.clear()
     this.router.navigate(['/login'])
 

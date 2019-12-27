@@ -1,19 +1,18 @@
-<div class="container-lg">
-    <div *ngIf="rowData!=null && errorMessage==null && rowData.length>0; else show">
+<div class="container-fluid">
+    <div *ngIf=" errorMessage==null " >
       <br>
-  
-  
-      <ag-grid-angular #myGrid [pagination]="true" id="myGrid" [paginationPageSize]=pageSize
-        style="height: 500px; width: 100%;" 
-        [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" 
-        rowSelection='multiple'   
-        [rowMultiSelectWithClick]="true" 
-        [getRowHeight]="getRowHeight" class="ag-theme-balham" [rowData]="rowData" [suppressCellSelection]="true"
-        (gridReady)="onGridReady($event)">
-      </ag-grid-angular>      
+    
+    <ag-grid-angular #myGrid [pagination]="true" id="myGrid" [paginationPageSize]=pageSize
+    style="height: 550px; width: 94%; margin-left:3%;" 
+    [columnDefs]="columnDefs" [defaultColDef]="defaultColDef" 
+    rowSelection='multiple'   
+    [rowMultiSelectWithClick]="true"        
+    [getRowHeight]="getRowHeight" class="ag-theme-balham" [rowData]="rowData" [suppressCellSelection]="true"
+    (gridReady)="onGridReady($event)">
+  </ag-grid-angular>    
       
     </div>   
-
+<!-- 
     <ng-template #show>
       <div *ngIf="listOfSuccessfultask==null" class="container col-lg-7 col-lg-offset-2 text-center">
         <br>
@@ -24,7 +23,7 @@
           </h1>
         </div>
       </div>
-    </ng-template>
+    </ng-template> -->
   
     <div *ngIf="errorMessage!=null">
       <div class="container col-lg-8 col-lg-offset-2 shadow-lg  mb-5 bg-white rounded">

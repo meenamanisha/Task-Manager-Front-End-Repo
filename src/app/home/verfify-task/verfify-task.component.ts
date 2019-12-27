@@ -4,6 +4,7 @@ import { user } from 'src/app/models/User';
 import { task } from 'src/app/models/task';
 import { UserServService } from '../HomeServices/user-serv.service';
 import { taskStatus } from 'src/app/models/TaskStatus';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-verfify-task',
@@ -19,16 +20,18 @@ export class VerfifyTaskComponent implements OnInit {
   gridColumnApi;
   defaultColDef;
 
-  constructor(private injector: Injector, private service:UserServService) {
+  constructor(private datePipe: DatePipe, private service:UserServService) {
     this.columnDefs = [
-      { headerName: 'User Id', field: 'tUserId'},
-      { headerName: 'User Name', field: 'tUserName', width: 140 },
+      { headerName: 'User Id', field: 'tUserId',width:110},
+      { headerName: 'User Name', field: 'tUserName', width: 120 },
       { headerName: 'Task Id', field: 'tId', width: 110 },
-      { headerName: 'Task Name', field: 'tName', width: 130 },
+      { headerName: 'Task Name', field: 'tName', width: 110 },
       { headerName: 'Task STatus', field: 'tStatus', width: 130 },
-      { headerName: 'Allocation Date', field: 'tAllDate', width: 130 },
-      { headerName: 'Expected Effort', field: 'tExpEff', width: 130 },
-      { headerName: 'Actual Effort', field: 'tActEff', width: 130 }
+      { headerName: 'Allocation Date', field: 'tAllDate', width: 130,cellRenderer: (data) => { return this.datePipe.transform(data.value) } },
+      { headerName: 'Expected(hrs)', field: 'tExpEff', width: 120 },
+      { headerName: 'Actual(hrs)', field: 'tActEff', width: 120 },
+      { headerName: 'Creation Date', field: 'tCreatDate', width: 130,cellRenderer: (data) => { return this.datePipe.transform(data.value) } },
+      { headerName: 'Compl Date', field: 'tCompDate', width: 130,cellRenderer: (data) => { return this.datePipe.transform(data.value) } }
     ];
     this.defaultColDef = { 
       headerCheckboxSelection: isFirstColumn,
@@ -42,11 +45,12 @@ export class VerfifyTaskComponent implements OnInit {
     this.gridApi.showLoadingOverlay()    
     this.gridApi.showNoRowsOverlay()
     this.gridApi.hideOverlay() 
+    this.gridApi.sizeColumnsToFit();
 
   }
 
   ngOnInit() { 
-    this.service.allManAssignedTask("pendingTaskToVerify").subscribe(
+    this.service.getAllPendingTask().subscribe(
 
       t=>
       {
@@ -54,7 +58,8 @@ export class VerfifyTaskComponent implements OnInit {
         localStorage.setItem('penT', JSON.stringify(this.rowData.length));
         this.service.len = this.rowData.length          
       },
-      err=>this.errorMessage=err
+      err=>
+        this.errorMessage=err
     );
 
   }
@@ -103,8 +108,7 @@ export class VerfifyTaskComponent implements OnInit {
   //   m.forEach((value: user, key: number) => {
   //     let u:user =value;
   // });
-  let parentComponent = this.injector.get(HomeComponent); 
-  
+
   
   this.service.verifyPendingTask(selectedTask).subscribe(
     t=>{

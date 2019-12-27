@@ -11,6 +11,8 @@ export class task {
 	tCompDate: Date;
 	tDesc: String;
 	taskOwner:String;
+	tUserId:number;
+	tUserName:string;
 
 
 }

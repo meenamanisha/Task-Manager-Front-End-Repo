@@ -20,14 +20,9 @@ export class VerfifyTaskComponent implements OnInit {
   defaultColDef;
 
   constructor(private injector: Injector, private service:UserServService) {
-    let parentComponent = this.injector.get(HomeComponent);
-    this.rowData = parentComponent.pendingTask;
-    this.errorMessage = parentComponent.errorMessage 
-
-
     this.columnDefs = [
-      { headerName: 'User Id', field: 'id'},
-      { headerName: 'User Name', field: 'name', width: 140 },
+      { headerName: 'User Id', field: 'tUserId'},
+      { headerName: 'User Name', field: 'tUserName', width: 140 },
       { headerName: 'Task Id', field: 'tId', width: 110 },
       { headerName: 'Task Name', field: 'tName', width: 130 },
       { headerName: 'Task STatus', field: 'tStatus', width: 130 },
@@ -50,10 +45,17 @@ export class VerfifyTaskComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() { 
+    this.service.allManAssignedTask("pendingTaskToVerify").subscribe(
 
-    // this.rowData = this.allPendingTask
-    // console.log(this.rowData);
+      t=>
+      {
+        this.rowData = t 
+        localStorage.setItem('penT', JSON.stringify(this.rowData.length));
+        this.service.len = this.rowData.length          
+      },
+      err=>this.errorMessage=err
+    );
 
   }
   listOfSuccessfultask:number[]; 
@@ -67,7 +69,7 @@ export class VerfifyTaskComponent implements OnInit {
     if(params.node.selected )
     {
       this.rowData[params.rowIndex].tStatus=taskStatus.COMPLETED;
-      delete this.rowData[params.rowIndex]
+      this.rowData.splice(params.rowIndex,1);
       
     }
 
@@ -84,19 +86,16 @@ export class VerfifyTaskComponent implements OnInit {
     let m = new Map<number, user>();    
     for(let item of this.gridApi.getSelectedRows())
     {    
-      console.log(item);
-      
-      if(!m.has(item.id))
+      if(!m.has(item.tUserId))
         {
           let ur:user = new user();
           ur.tasks = []
-          ur.usrId = item.id
+          ur.usrId = item.tUserId
           selectedTask.push(ur);      
-          m.set(item.id,ur);
-          console.log(selectedTask);
+          m.set(item.tUserId,ur); 
           
         }
-        let t = m.get(item.id);      
+        let t = m.get(item.tUserId);      
         let  tk:task = new task();
         tk.tId = item.tId
         t.tasks.push(tk);         
@@ -104,21 +103,17 @@ export class VerfifyTaskComponent implements OnInit {
   //   m.forEach((value: user, key: number) => {
   //     let u:user =value;
   // });
-  let parentComponent = this.injector.get(HomeComponent);
-  console.log(selectedTask);
+  let parentComponent = this.injector.get(HomeComponent); 
   
   
   this.service.verifyPendingTask(selectedTask).subscribe(
     t=>{
       this.listOfSuccessfultask = t,
-      this.gridApi.setRowData(this.rowData);  
-      parentComponent.pendingTask = this.rowData;
-      parentComponent.lenOfPendingTask=this.rowData.length
+      this.gridApi.setRowData(this.rowData);
+      localStorage.setItem('penT', JSON.stringify(this.rowData.length));
+      this.service.len = this.rowData.length                  
     },
-    err=>{this.errorMessage = err
-
-      this.rowData = parentComponent.pendingTask;
-
+    err=>{this.errorMessage = err 
     }
   );    
   }

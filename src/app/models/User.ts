@@ -15,4 +15,5 @@ export class user {
 	usrMName: String;
 	usrMEmail: String;
 	tasks:task[] = [];
+	pendingTask:number;
 }

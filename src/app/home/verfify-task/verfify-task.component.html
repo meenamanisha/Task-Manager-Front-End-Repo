@@ -1,6 +1,6 @@
 
   <div class="container-lg">
-  <div *ngIf="rowData!=null && errorMessage==null" >
+  <div *ngIf="  errorMessage==null; else show" >
     <br>
 
 
@@ -21,6 +21,18 @@
       </button>
 
   </div>
+
+  <ng-template #show>
+    <div *ngIf="listOfSuccessfultask==null" class="container col-lg-7 col-lg-offset-2 text-center">
+      <br>
+      <br>
+      <div class="alert alert-success alert-dismissible fade show ">
+        <h1>
+          No Task To Show!!!!!!!!
+        </h1>
+      </div>
+    </div>
+  </ng-template>
 
   
   <div *ngIf="listOfSuccessfultask!=null && errorMessage==null">

@@ -13,6 +13,7 @@ import { VerfifyTaskComponent } from './home/verfify-task/verfify-task.component
 import { EmployeePageComponent } from './home/employee-page/employee-page.component';
 import { TaskviewComponent } from './home/taskview/taskview.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
+import { ManHistComponent } from './home/man-hist/man-hist.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
     {path:'verifyTask',component:VerfifyTaskComponent,canActivate:[RouteGaurdService]},
     {path:'employeeTask',component:EmployeePageComponent,canActivate:[RouteGaurdService]},
     {path:'viewHistory',component:TaskviewComponent,canActivate:[RouteGaurdService]},
-    {path:'dashboard',component:DashboardComponent,canActivate:[RouteGaurdService]}
+    {path:'dashboard',component:DashboardComponent,canActivate:[RouteGaurdService]},
+    {path:'manHist',component:ManHistComponent,canActivate:[RouteGaurdService]}
   ]},
   
   {path:'login',component:LoginComponent,runGuardsAndResolvers: 'always'},   

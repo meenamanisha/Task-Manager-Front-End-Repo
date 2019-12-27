@@ -27,10 +27,6 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
   //   this.gridApi.paginationSetPageSize(this.pageSize)
   // }
   constructor(private injector: Injector, private service: UserServService, private elementRef: ElementRef, private datePipe: DatePipe) {
-
-    let parentComponent = this.injector.get(HomeComponent);
-    this.rowData = parentComponent.pendingTask;
-    this.errorMessage = parentComponent.errorMessage;
     this.columnDefs = [
       { headerName: 'Task Id', field: 'tId', width: 110 },
       { headerName: 'Task Name', field: 'tName', width: 130 },
@@ -104,10 +100,7 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
 
   submit() {
 
-    let tasks: task[] = []; 
-    let parentComponent = this.injector.get(HomeComponent);
-    let r = parentComponent.remainingTask;
-
+    let tasks: task[] = [];  
     for (let i of this.gridApi.getSelectedRows()) {
       if(i.tStatus=='IN_PROCESS')
         continue;
@@ -120,8 +113,7 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
       var msec = d1.getTime() - d2.getTime();
       var mins = Math.floor(msec / 60000);
       var hrs = Math.floor(mins / 60);
-      i.tActEff = hrs;
-      parentComponent.remainingTask.push(i)
+      i.tActEff = hrs; 
       tasks.push(i);
     }
 
@@ -131,16 +123,13 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
     this.service.userProcessedTask(tasks).subscribe(
       t=>{                
         this.listOfSuccessfultask = t
-        this.gridApi.setRowData(this.rowData);        
-        parentComponent.pendingTask=this.rowData; 
-        parentComponent.lenOfPendingTask = this.rowData.length  
-        this.isShow = false;
+        this.gridApi.setRowData(this.rowData);             
+        this.service.len = this.rowData.length
              
 
       },
       err=>{
-        this.errorMessage = err
-        parentComponent.remainingTask = r
+        this.errorMessage = err 
       }
     );
 
@@ -149,6 +138,11 @@ export class EmployeePageComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss');        
+
+    this.service.getAllTask("assignedTask").subscribe(
+      t=> this.rowData = t,
+      err=>this.errorMessage=err
+    );
 
 
   }

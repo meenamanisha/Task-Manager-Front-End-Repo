@@ -13,7 +13,17 @@ import { task } from 'src/app/models/task';
 })
 export class UserServService {
 
-  constructor(private http: HttpClient, private serv: AuthenticationService) { }
+  constructor(private http: HttpClient, private serv: AuthenticationService) { 
+    this.currentUser = JSON.parse(localStorage.getItem('user'));        
+    if(!localStorage.getItem('penT'))
+    {
+      this.len = this.currentUser.pendingTask; 
+      localStorage.setItem('penT', JSON.stringify(this.len));
+    }
+    else
+      this.len = parseInt(localStorage.getItem('penT'));
+
+  }
 
   public updateManager: Subject<any> = new Subject();
   public userChange: Subject<any> = new Subject();
@@ -21,26 +31,37 @@ export class UserServService {
   currentUser: user;
   isShow = false;
   allEmployees: user[];
+  public len:number=null;
 
+
+  getAllTaskUser(): Observable<any> {
+    const uri = environment.baseURI + paths.proPath + paths.userTask + "/" + this.currentUser.usrId;
+    return this.http.get<any>(uri).pipe(retry(1), catchError(this.handleError));
+  }
+
+  allManAssignedTask(s:string): Observable<any> {
+    const uri = environment.baseURI + paths.proPath + paths.allManAssignedTask + "/" + this.currentUser.usrId+"/"+s;
+    return this.http.get<any>(uri).pipe(retry(1), catchError(this.handleError));
+  }
 
   verifyPendingTask(usr: user[]): Observable<any> {
     const uri = environment.baseURI + paths.proPath + paths.verifyTask + "/" + this.currentUser.usrId;
     return this.http.put<any>(uri, usr).pipe(retry(1), catchError(this.handleError));
   }
 
-  getAssignedTask(): Observable<any> {
-    const uri = environment.baseURI + paths.proPath + paths.assignedTaskToUser + "/" + this.currentUser.usrId;
-    console.log(uri);
+  // getAssignedTask(): Observable<any> {
+  //   const uri = environment.baseURI + paths.proPath + paths.assignedTaskToUser + "/" + this.currentUser.usrId;
+  //   console.log(uri);
     
-    return this.http.get<any>(uri).pipe(retry(1), catchError(this.handleError));
-  }
+  //   return this.http.get<any>(uri).pipe(retry(1), catchError(this.handleError));
+  // }
   userProcessedTask(tasks:task[]): Observable<any> {
     const uri = environment.baseURI + paths.proPath + paths.userProcessingTask + "/" + this.currentUser.usrId;
     return this.http.put<any>(uri,tasks).pipe(retry(1), catchError(this.handleError));
   }
 
 
-  getAllPendingTask(): Observable<any> {
+    getAllPendingTask(): Observable<any> {
     const uri = environment.baseURI + paths.proPath + paths.pendingTask + "/" + this.currentUser.usrId;
     return this.http.get<any>(uri).pipe(retry(1), catchError(this.handleError));
   }
@@ -91,8 +112,8 @@ export class UserServService {
   }
 
 
-  getAllTask(): Observable<any> {
-    const uri = environment.baseURI + paths.proPath + paths.getTask + "/" + this.currentUser.usrId;
+  getAllTask(s:string): Observable<any> {
+    const uri = environment.baseURI + paths.proPath + paths.getTask + "/" + this.currentUser.usrId+"/"+s;
     return this.http.get<any>(uri).pipe(retry(1), catchError(this.handleError));
   }
 }

@@ -12,5 +12,7 @@ export const paths = {
   verifyTask:"tasks/verifyTask",
   assignedTaskToUser:"tasks/getAssignedTask",
   userProcessingTask:"tasks/completeTask",
+  userTask:"tasks/userTask",
+  allManAssignedTask:"tasks/allManAssignedTask"
 
 };

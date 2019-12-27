@@ -1,5 +1,5 @@
 <div class="container-lg">
-    <div *ngIf="errorMessage==null; else show">
+    <div *ngIf="rowData!=null && errorMessage==null && rowData.length>0; else show">
       <br>
   
   
@@ -13,6 +13,7 @@
       </ag-grid-angular>      
       
     </div>   
+
     <ng-template #show>
       <div *ngIf="listOfSuccessfultask==null" class="container col-lg-7 col-lg-offset-2 text-center">
         <br>
@@ -24,7 +25,7 @@
         </div>
       </div>
     </ng-template>
-
+  
     <div *ngIf="errorMessage!=null">
       <div class="container col-lg-8 col-lg-offset-2 shadow-lg  mb-5 bg-white rounded">
         <br>

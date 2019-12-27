@@ -1,5 +1,7 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { HomeComponent } from '../home.component';
+import { task } from 'src/app/models/task';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,11 +18,36 @@ export class DashboardComponent implements OnInit {
 
   private gridColumnApi;
   private defaultColDef;
+  private allTask:task[] = [];
+  constructor(private datePipe: DatePipe) { 
 
-  constructor(private datePipe: DatePipe, private injector:Injector) {
+    this.allTask.forEach(e=> {
+      let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');        
+      let date1:Date = new Date(e.tAllDate)
+      let date2:Date = new Date();
+      let day = date2.getDay();
+      let firstDay = date2.getDate()-day;
+      if(date2.getDate()-date1.getDate()<=day )
+        console.log(e.tAllDate);
+      else
+      {
+        console.log(e);
+        
+      }      
+      console.log("=========================================");
+      
+      
+      // console.log(date2.setd(firstDay));
+      // console.log(date1.getDate);      
+      // if(date1.get)
+      // console.log(date);      
+      // e["Average Percentage"] = null
+      // console.log(date2); 
+      // console.log(d2.getHours());      
+    }
+    );
+    
 
-    
-    
     // this.columnDefs = [
     //   { headerName: 'Task Id', field: 'tId', width: 110 },
     //   { headerName: 'Task Name', field: 'tName', width: 130 },
@@ -56,11 +83,13 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
   }
   onGridReady(params) {
     this.gridApi = params.api;
-    this.gridApi.suppressNoRowsOverlay = false; 
-    this.gridApi.showLoadingOverlay()    
+    this.gridApi.suppressNoRowsOverlay = false;
+    this.gridApi.showLoadingOverlay()
     this.gridApi.showNoRowsOverlay()
     this.gridApi.hideOverlay()
 
@@ -72,7 +101,7 @@ var statusMapping = {
   IN_PROCESS: "In Process",
   CANCELLED: "Cancel",
   PENDING_TO_VERFIFY: "Verification Pending",
-  COMPLETED:"Complete"
+  COMPLETED: "Complete"
 };
 
 function extractValues(mappings) {

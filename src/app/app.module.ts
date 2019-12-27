@@ -25,6 +25,7 @@ import { EmployeePageComponent } from './home/employee-page/employee-page.compon
 import { DropDownForStatusComponent } from './home/employee-page/drop-down-for-status/drop-down-for-status.component';
 import { TaskviewComponent } from './home/taskview/taskview.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
+import { ManHistComponent } from './home/man-hist/man-hist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { DashboardComponent } from './home/dashboard/dashboard.component';
     EmployeePageComponent,
     DropDownForStatusComponent,
     TaskviewComponent,
-    DashboardComponent
+    DashboardComponent,
+    ManHistComponent
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,7 @@
           <a *ngIf="userRole==2" class="nav-link" (click)="change('profile')" [routerLink]="['verifyTask']"
             routerLinkActive="active">
             <span class="p1 fa-stack fa-1x has-badge"
-              [attr.data-count]="lenOfPendingTask==0?undefined:lenOfPendingTask">
+              [attr.data-count]="serv.len==0?undefined:serv.len">
               <i class="p3 fa fa-bell fa-stack-1x fa-inverse"></i>
             </span>
             &nbsp;&nbsp;
@@ -33,7 +33,7 @@
           <a *ngIf="userRole==3" class="nav-link" (click)="change('profile')" [routerLink]="['employeeTask']"
             routerLinkActive="active">
             <span class="p1 fa-stack fa-1x has-badge"
-              [attr.data-count]="lenOfPendingTask==0?undefined:lenOfPendingTask">
+              [attr.data-count]="serv.len==0?undefined:serv.len">
               <i class="p3 fa fa-bell fa-stack-1x fa-inverse"></i>
             </span>
             &nbsp;&nbsp;
@@ -138,7 +138,7 @@
               <div class="panel-body"><img src="assets/TaskHistory.png" class="img-responsive" style="width: 100%;"
                   alt="Image"></div>                  
               <div class="panel-footer"><a class="btn btn-success btn-block " (click)="change('userDetails')"
-                  [routerLink]="['viewHistory']">View History</a></div>
+                  [routerLink]="['manHist']">View History</a></div>
             </div>
           </div>
 

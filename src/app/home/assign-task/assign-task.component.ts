@@ -60,9 +60,8 @@ export class AssignTaskComponent implements OnInit {
     this.currentUser = this.service.currentUser;
     this.service.userChange.subscribe(data => this.changeUser(data))
 
-    this.service.getAllTask().subscribe(
-      t => {
-
+    this.service.getAllTaskUser().subscribe(
+      t => {        
         this.rowData = t
         this.rowData.forEach(function (e) {
           e["usr"] = null
@@ -79,7 +78,9 @@ export class AssignTaskComponent implements OnInit {
   changeUser(data) {
     this.rowData[data.ind].usr = data.usr.usrName
     this.rowData[data.ind].tStatus=taskStatus.IN_PROCESS
-    let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm:ss');        
+    let date = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');        
+    // console.log(datre);
+    
     let tempTask = { ...data.task };  
     delete tempTask['usr'];  
     tempTask.tAllDate=date;
